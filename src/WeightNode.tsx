@@ -27,8 +27,6 @@ function WeightNode({ id, data, type }: NodeProps<NodeData>) {
         }}
         type="number"
         step="0.01"
-        min={0}
-        max={1}
         defaultValue={data?.value}
         onChange={(evt) => updateWeight(id, Number(evt.target.value))}
         className="nodrag"

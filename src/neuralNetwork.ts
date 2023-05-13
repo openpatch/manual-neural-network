@@ -41,16 +41,6 @@ export const initialNN: NeuralNetwork = {
       weights: [0.0, 0.1],
     },
   ],
-  hiddenLayers: [
-    [
-      {
-        weights: [0.1, 0.1],
-      },
-      {
-        weights: [0.4, 0.5],
-      },
-    ],
-  ],
   outputLayer: [
     {
       label: "Spam",
