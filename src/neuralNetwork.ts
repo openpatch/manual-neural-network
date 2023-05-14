@@ -22,22 +22,32 @@ export const initialNN: NeuralNetwork = {
   inputLayer: [
     {
       label: "Anzahl der Empfänger",
-      value: 23,
+      value: 1,
       weights: [0.2, 0.1],
     },
     {
-      label: "Anzahl der Rechtschreibfehler",
-      value: 1,
+      label: "Vertrauenswürdiger Absender",
+      value: 0.4,
       weights: [0.7, 0.8],
     },
     {
-      label: "Enthält Links zu verdächtigen Internetseiten",
+      label: "Anzahl der Links",
       value: 3,
       weights: [0.0, 0.1],
     },
     {
-      label: "Anzahl der Mails, die der Empfänger schon vom Absender erhalten hat",
+      label: "Anzahl Wörter im Betreff",
       value: 3,
+      weights: [0.0, 0.1],
+    },
+    {
+      label: "Anzahl Emojis im Betreff",
+      value: 0,
+      weights: [0.0, 0.1],
+    },
+    {
+      label: "Text enthält Namen des Empfängers",
+      value: 0,
       weights: [0.0, 0.1],
     },
   ],
