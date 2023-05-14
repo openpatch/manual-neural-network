@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.1",
     "@types/react-modal": "^3.16.0",
+    "@uiw/react-codemirror": "^4.19.16",
     "dagre": "^0.8.5",
+    "html-to-image": "^1.11.11",
     "js-base64": "^3.7.5",
     "pako": "^2.1.0",
     "react": "^18.2.0",

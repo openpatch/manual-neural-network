@@ -19,3 +19,27 @@ path.react-flow__edge-path {
 path.react-flow__edge-path:hover {
   stroke-width: 10;
 }
+
+.cm-editor {
+  font-size: 12px;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+
+button {
+  background: whitesmoke;
+  color: grey;
+  cursor: pointer;
+  border: 0;
+  flex: 1;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+button:hover {
+  background: lightgrey;
+}

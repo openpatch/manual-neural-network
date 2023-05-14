@@ -5,8 +5,11 @@ import { deserializeState, serializeState } from "./serde";
 import { NeuralNetwork, initialNN } from "./neuralNetwork";
 
 export type RFState = {
+  route: string;
   selectedNodeId: string;
   neuralNetwork: NeuralNetwork;
+  setRoute: (route: string) => void;
+  updateNeuralNetwork: (network: NeuralNetwork) => void;
   updateInputValue: (nodeId: string, value: number) => void;
   updateWeight: (edgeId: string, value: number) => void;
   selectNodeId: (nodeId: string) => void;
@@ -28,6 +31,12 @@ const hashStorage: StateStorage = {
 const useStore = create(
   persist<RFState>(
     (set, get) => ({
+      route: "view",
+      setRoute: (route: string) => {
+        set({
+          route,
+        });
+      },
       selectedNodeId: "",
       selectNodeId: (nodeId: string) => {
         set({
@@ -35,6 +44,11 @@ const useStore = create(
         });
       },
       neuralNetwork: initialNN,
+      updateNeuralNetwork: (network: NeuralNetwork) => {
+        set({
+          neuralNetwork: network,
+        });
+      },
       updateWeight: (edgeId: string, weight: number) => {
         const [layer, level, source, target] = edgeId.split("-");
         const neuralNetwork = get().neuralNetwork;
