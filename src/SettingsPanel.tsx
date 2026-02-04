@@ -4,6 +4,7 @@ export const SettingsPanel = () => {
   return (
     <>
       <Panel position="top-right">
+        <div></div>
       </Panel>
     </>
   );

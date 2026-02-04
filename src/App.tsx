@@ -5,6 +5,7 @@ import { Network } from "./Network";
 import useStore, { RFState } from "./store";
 import { shallow } from "zustand/shallow";
 import { Editor } from "./Editor";
+import { FlowEditor } from "./FlowEditor";
 
 const selector = (state: RFState) => ({
   route: state.route
@@ -20,7 +21,8 @@ function App() {
     <div style={{ width: "100vw", height: "100vh" }}>
       {route === "view" &&
       <Network />}
-      {route === "edit" && <Editor />}
+      {route === "edit" && <FlowEditor />}
+      {route === "code" && <Editor />}
     </div>
   );
 }

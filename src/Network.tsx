@@ -34,6 +34,10 @@ export const Network = () => {
   const onEdit = () => {
     setRoute("edit");
   };
+  
+  const onCodeEdit = () => {
+    setRoute("code");
+  };
 
   const onDownloadPng = () => {
     toPng(document.querySelector(".neural-network") as any, {
@@ -94,7 +98,8 @@ export const Network = () => {
       <Panel position="top-right">
         <div className="button-group">
           <button onClick={onDownloadPng}>Download (PNG)</button>
-          <button onClick={onEdit}>Edit</button>
+          <button onClick={onEdit}>Edit (Visual)</button>
+          <button onClick={onCodeEdit}>Edit (Code)</button>
         </div>
       </Panel>
       <SettingsPanel />
