@@ -76,17 +76,6 @@ export const FlowEditor = () => {
     setNn(newNn);
   };
 
-  const updateInputWeight = (nodeIndex: number, weightIndex: number, value: number) => {
-    const newNn = { ...nn };
-    newNn.inputLayer = [...newNn.inputLayer];
-    newNn.inputLayer[nodeIndex] = { 
-      ...newNn.inputLayer[nodeIndex], 
-      weights: [...newNn.inputLayer[nodeIndex].weights]
-    };
-    newNn.inputLayer[nodeIndex].weights[weightIndex] = value;
-    setNn(newNn);
-  };
-
   const addInputNode = () => {
     const newNn = { ...nn };
     const outputCount = nn.hiddenLayers?.[0]?.length || nn.outputLayer.length;
@@ -274,20 +263,6 @@ export const FlowEditor = () => {
     setSelectedNode(null);
   };
 
-  const updateHiddenWeight = (layerIndex: number, nodeIndex: number, weightIndex: number, value: number) => {
-    const newNn = { ...nn };
-    if (!newNn.hiddenLayers) return;
-
-    newNn.hiddenLayers[layerIndex] = [...newNn.hiddenLayers[layerIndex]];
-    newNn.hiddenLayers[layerIndex][nodeIndex] = {
-      ...newNn.hiddenLayers[layerIndex][nodeIndex],
-      weights: [...newNn.hiddenLayers[layerIndex][nodeIndex].weights]
-    };
-    newNn.hiddenLayers[layerIndex][nodeIndex].weights[weightIndex] = value;
-
-    setNn(newNn);
-  };
-
   const renderEditPanel = () => {
     if (!selectedNode) {
       return (
@@ -361,36 +336,12 @@ export const FlowEditor = () => {
               onChange={(e) => updateInputNode(selectedNode.nodeIndex, "label", e.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label>Value:</label>
-            <input
-              type="number"
-              value={node.value}
-              onChange={(e) => updateInputNode(selectedNode.nodeIndex, "value", parseFloat(e.target.value) || 0)}
-            />
-          </div>
-          <div className="form-group">
-            <label>Weights:</label>
-            <div className="weights-list">
-              {node.weights.map((weight, wIndex) => (
-                <div key={wIndex} className="weight-row">
-                  <span>→ Output {wIndex + 1}</span>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={weight}
-                    onChange={(e) => updateInputWeight(selectedNode.nodeIndex, wIndex, parseFloat(e.target.value) || 0)}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+
         </div>
       );
     }
 
     if (selectedNode.type === 'hidden' && selectedNode.layerIndex !== undefined) {
-      const node = nn.hiddenLayers![selectedNode.layerIndex][selectedNode.nodeIndex];
       return (
         <div className="edit-panel">
           <div className="panel-header">
@@ -412,22 +363,7 @@ export const FlowEditor = () => {
               </button>
             </div>
           </div>
-          <div className="form-group">
-            <label>Weights:</label>
-            <div className="weights-list">
-              {node.weights.map((weight, wIndex) => (
-                <div key={wIndex} className="weight-row">
-                  <span>→ Output {wIndex + 1}</span>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={weight}
-                    onChange={(e) => updateHiddenWeight(selectedNode.layerIndex!, selectedNode.nodeIndex, wIndex, parseFloat(e.target.value) || 0)}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+
           <button 
             onClick={() => addHiddenNode(selectedNode.layerIndex!)}
             className="add-btn"
