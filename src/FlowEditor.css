@@ -90,6 +90,18 @@
   opacity: 0.5;
 }
 
+.deselect-btn {
+  background: #757575;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+.deselect-btn:hover {
+  background: #616161;
+}
+
 .add-btn {
   background: #2196F3;
   color: white;
@@ -140,6 +152,38 @@
 }
 
 .weight-row input {
+  flex: 1;
+  font-size: 14px;
+  padding: 6px 8px;
+}
+
+.labels-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.labels-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.label-row span {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: #666;
+  min-width: 80px;
+}
+
+.label-row input {
   flex: 1;
   font-size: 14px;
   padding: 6px 8px;

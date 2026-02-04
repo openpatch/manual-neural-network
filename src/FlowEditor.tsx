@@ -55,6 +55,10 @@ export const FlowEditor = () => {
     }
   }, []);
 
+  const onPaneClick = useCallback(() => {
+    setSelectedNode(null);
+  }, []);
+
   const onSave = useCallback(() => {
     updateNeuralNetwork(nn);
     setRoute("view");
@@ -294,6 +298,35 @@ export const FlowEditor = () => {
             <button onClick={addHiddenLayer} className="add-btn">+ Add Hidden Layer</button>
             <button onClick={addOutputNode} className="add-btn">+ Add Output Node</button>
           </div>
+          
+          <div className="labels-section">
+            <h4>Input Labels</h4>
+            {nn.inputLayer.map((node, index) => (
+              <div key={index} className="label-row">
+                <span>Input {index + 1}:</span>
+                <input
+                  type="text"
+                  value={node.label}
+                  onChange={(e) => updateInputNode(index, "label", e.target.value)}
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="labels-section">
+            <h4>Output Labels</h4>
+            {nn.outputLayer.map((node, index) => (
+              <div key={index} className="label-row">
+                <span>Output {index + 1}:</span>
+                <input
+                  type="text"
+                  value={node.label}
+                  onChange={(e) => updateOutputNode(index, e.target.value)}
+                />
+              </div>
+            ))}
+          </div>
+
           <p style={{ marginTop: '20px', color: '#666', fontSize: '14px' }}>
             Click on a node to edit its properties
           </p>
@@ -301,19 +334,24 @@ export const FlowEditor = () => {
       );
     }
 
+    const onDeselect = () => setSelectedNode(null);
+
     if (selectedNode.type === 'input') {
       const node = nn.inputLayer[selectedNode.nodeIndex];
       return (
         <div className="edit-panel">
           <div className="panel-header">
             <h3>Input Node {selectedNode.nodeIndex + 1}</h3>
-            <button 
-              onClick={() => removeInputNode(selectedNode.nodeIndex)}
-              className="delete-btn"
-              disabled={nn.inputLayer.length <= 1}
-            >
-              Delete
-            </button>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button onClick={onDeselect} className="deselect-btn">Back</button>
+              <button 
+                onClick={() => removeInputNode(selectedNode.nodeIndex)}
+                className="delete-btn"
+                disabled={nn.inputLayer.length <= 1}
+              >
+                Delete
+              </button>
+            </div>
           </div>
           <div className="form-group">
             <label>Label:</label>
@@ -358,6 +396,7 @@ export const FlowEditor = () => {
           <div className="panel-header">
             <h3>Hidden Layer {selectedNode.layerIndex + 1}, Node {selectedNode.nodeIndex + 1}</h3>
             <div style={{ display: 'flex', gap: '8px' }}>
+              <button onClick={onDeselect} className="deselect-btn">Back</button>
               <button 
                 onClick={() => removeHiddenNode(selectedNode.layerIndex!, selectedNode.nodeIndex)}
                 className="delete-btn"
@@ -406,13 +445,16 @@ export const FlowEditor = () => {
         <div className="edit-panel">
           <div className="panel-header">
             <h3>Output Node {selectedNode.nodeIndex + 1}</h3>
-            <button 
-              onClick={() => removeOutputNode(selectedNode.nodeIndex)}
-              className="delete-btn"
-              disabled={nn.outputLayer.length <= 1}
-            >
-              Delete
-            </button>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button onClick={onDeselect} className="deselect-btn">Back</button>
+              <button 
+                onClick={() => removeOutputNode(selectedNode.nodeIndex)}
+                className="delete-btn"
+                disabled={nn.outputLayer.length <= 1}
+              >
+                Delete
+              </button>
+            </div>
           </div>
           <div className="form-group">
             <label>Label:</label>
@@ -439,6 +481,7 @@ export const FlowEditor = () => {
         nodeTypes={nodeTypes}
         minZoom={0.1}
         onNodeClick={onNodeClick}
+        onPaneClick={onPaneClick}
         proOptions={{
           hideAttribution: true
         }}
